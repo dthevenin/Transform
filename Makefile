@@ -52,8 +52,8 @@ force_clean:
 	-$(RM_RF) tmp
 
 clean_libs:
-	-$(RM_RF) build/transform.js
-	-$(RM_RF) build/transform_min.js
+	-$(RM_RF) build/vs_transform.js
+	-$(RM_RF) build/vs_transform_min.js
 	-$(RM_RF) tmp
 		
 makedirs:
@@ -75,12 +75,12 @@ endif
 ###                    transform_js
 ##############################################################
 
-transform_js_release: build/transform.js
-	-$(COMPILE) --js=build/transform.js --js_output_file=build/transform_min.js
+transform_js_release: build/vs_transform.js
+	-$(COMPILE) --js=build/vs_transform.js --js_output_file=build/vs_transform_min.js
 	
-transform_js_debug: build/transform.js
+transform_js_debug: build/vs_transform.js
 
-build/transform.js: src/Transform.js
+build/vs_transform.js: src/Transform.js
 	$(ECHO) $(UTIL_HEADER) >> $@
 	$(CAT) src/Transform.js >> $@
 	$(ECHO) $(UTIL_FOOTER) >> $@
