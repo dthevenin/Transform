@@ -93,5 +93,7 @@ build/vs_util.js:
 	git clone https://github.com/dthevenin/Util.git tmp
 	-$(CP) tmp/build/vs_util.js build/vs_util.js
 	-$(CP) tmp/build/firminCSSMatrix.js build/firminCSSMatrix.js
+	-$(CP) tmp/build/vs_util_min.js build/vs_util_min.js
+	-$(CP) tmp/build/firminCSSMatrix_min.js build/firminCSSMatrix_min.js
 	-$(RM_RF) tmp
 	
