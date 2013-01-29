@@ -12,7 +12,10 @@
         position: absolute;
         top: 100px;
         left: 100px;
-        -webkit-transform-origin : 0 0;
+        -webkit-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        transform-origin: 0 0;
       }
       #node1 {
         background-color: blue;
@@ -22,11 +25,9 @@
       }
     </style>
 
-    <script type="text/javascript" src="../src/libs/FirminCSSMatrix.js"></script>
-    <script type="text/javascript" src="../src/libs/util.js"></script>
-    <script type="text/javascript" src="../src/Point.js"></script>
-    <script type="text/javascript" src="../src/Transform.js"></script>
-    
+    <script type="text/javascript" src="../build/firminCSSMatrix.js"></script>
+    <script type="text/javascript" src="../build/vs_util.js"></script>
+    <script type="text/javascript" src="../build/transform.js"></script>
     
     <script>
       function test ()
@@ -34,12 +35,13 @@
         var node = document.getElementById ('node1');
         node.vsRotate (45);
         node.vsTranslate (50, 50);
-//        node.vsScale (2)
+        node.vsScale (2)
 
         node = document.getElementById ('node2');
-        node.vsSetNewTransformOrigin (new util.Point (50, 50))
+        node.vsSetNewTransformOrigin (new vs.Point (50, 50))
         node.vsRotate (45);
         node.vsTranslate (50, 50);
+        node.vsScale (2)
       }
     
     </script>
