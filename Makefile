@@ -41,18 +41,36 @@ all :: release
 Debug :: debug
 Release :: release
 
-release :: clean makedirs libs_release transform_js_release
+release :: clean makedirs build/vs_util.js transform_js_release
 
-debug :: clean makedirs libs_debug transform_js_debug
+debug :: clean makedirs build/vs_util.js transform_js_debug
 
 clean :: clean_libs
 
-clean_libs:
+force_clean:
 	-$(RM_RF) build
+	-$(RM_RF) tmp
+
+clean_libs:
+	-$(RM_RF) build/transform.js
+	-$(RM_RF) build/transform_min.js
+	-$(RM_RF) tmp
 		
 makedirs:
 	-$(MKPATH) build/
-	-$(MKPATH) build/libs/
+
+###                         EXPORT HEADERS / FOOTERS
+##############################################################
+
+ifdef REQUIRE_JS
+  UTIL_HEADER = "define ('vs_transform', ['vs', 'vs_util'], function (vs, util) {"
+  UTIL_FOOTER = "return util;\n});"
+else
+  UTIL_HEADER = "(function(){ \n\
+if (typeof exports === 'undefined') { exports = this; }\n\
+var vs = exports.vs, util = vs.util;\n"
+  UTIL_FOOTER = "}).call(this);"
+endif
 
 ###                    transform_js
 ##############################################################
@@ -62,21 +80,18 @@ transform_js_release: build/transform.js
 	
 transform_js_debug: build/transform.js
 
-build/transform.js: src/Point.js src/Transform.js
-	$(CAT) src/Point.js >> $@
+build/transform.js: src/Transform.js
+	$(ECHO) $(UTIL_HEADER) >> $@
 	$(CAT) src/Transform.js >> $@
-
+	$(ECHO) $(UTIL_FOOTER) >> $@
 
 ###                    libs
 ##############################################################
-
-libs_release: src/libs/FirminCSSMatrix.js src/libs/util.js 
-	-$(CP) src/libs/FirminCSSMatrix.js build/libs/firminCSSMatrix.js
-	-$(COMPILE) --js=build/libs/firminCSSMatrix.js --js_output_file=build/libs/firminCSSMatrix_min.js
-	-$(CP) src/libs/util.js build/libs/util.js
-	-$(COMPILE) --js=build/libs/util.js --js_output_file=build/libs/util_min.js
 	
-libs_debug: src/libs/FirminCSSMatrix.js src/libs/util.js
-	-$(CP) src/libs/firminCSSMatrix.js build/libs/firminCSSMatrix.js
-	-$(CP) src/libs/util.js build/libs/util.js
-
+build/vs_util.js:
+	-$(MKPATH) tmp/
+	git clone https://github.com/dthevenin/Util.git tmp
+	-$(CP) tmp/build/vs_util.js build/vs_util.js
+	-$(CP) tmp/build/firminCSSMatrix.js build/firminCSSMatrix.js
+	-$(RM_RF) tmp
+	
