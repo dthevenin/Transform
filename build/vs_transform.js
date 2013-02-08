@@ -1,6 +1,5 @@
 (function(){ 
- if (typeof exports === 'undefined') { exports = this; }
- var vs = exports.vs, util = vs.util;
+ var vs = this.vs, util = vs.util;
 
 var
   CSSMatrix = (vs && vs.CSSMatrix),
