@@ -1,0 +1,9 @@
+{
+  "name": "vs_transform",
+  "version": "1.0.0",
+  "description": "Transform.js is a microlib that aim to apply transformations on HTML element",
+  "main": "index.js",
+  "repository": "git@github.com:dthevenin/Transform.git",
+  "author": "<david.thevenin@gmail.com>",
+  "license": "MIT"
+}
