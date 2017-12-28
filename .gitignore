@@ -1,6 +1,3 @@
 .DS_Store
-build/firminCSSMatrix_min.js
-build/firminCSSMatrix.js
-build/vs_util_min.js
-build/vs_util.js
-tools/
+node_modules/
+.vscode/
