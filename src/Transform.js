@@ -1,6 +1,8 @@
-var
-  CSSMatrix = (vs && vs.CSSMatrix),
-  HTMLElement = (window && window.HTMLElement);
+
+
+import utils, { CSSMatrix } from 'vs_utils';
+
+const HTMLElement = (window && window.HTMLElement);
 
 /*****************************************************************
  *                Transformation methods
@@ -77,7 +79,6 @@ function setNewTransformOrigin (origin)
   if (!this._vs_transform) this._vs_transform = matrix;
   {
     this._vs_transform = matrix.multiply (this._vs_transform);
-    delete (matrix);
   }
   
   // Init a new transform space
@@ -95,7 +96,7 @@ function setNewTransformOrigin (origin)
  */
 function clearTransformStack ()
 {
-  if (this._vs_transform) delete (this._vs_transform);
+  if (this._vs_transform) delete this._vs_transform;
   this._vs_transform = undefined;
 };
 
@@ -151,11 +152,10 @@ function applyTransformation (node)
 {
   var matrix = node.vsGetCTM ();
   
-  util.setElementTransform (node, matrix.toString ());
-  delete (matrix);
+  utils.setElementTransform (node, matrix.toString ());
 };
 
-util.extend (HTMLElement.prototype, {
+utils.extend (HTMLElement.prototype, {
   _vs_node_tx:                  0,
   _vs_node_ty:                  0,
   _vs_node_s:              1,
