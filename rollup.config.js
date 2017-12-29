@@ -1,7 +1,7 @@
 const env = process.env.NODE_ENV
 
 const config = {
-  entry: 'src/transform.js',
+  entry: 'src/Transform.js',
   external: ['vs_utils'],
   globals: {},
   format: 'amd',
