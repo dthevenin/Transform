@@ -1,16 +1,26 @@
-const env = process.env.NODE_ENV
-
-const config = {
-  entry: 'src/Transform.js',
+export default {
+  input: 'src/Transform.js',
   external: ['vs_utils'],
-  globals: {},
-  format: 'amd',
-  moduleName: 'VSTransform',
+  output: [
+    {
+      file: './dist/vs_transform.js',
+      name: 'vs_transform',
+      globals: {},
+      format: 'iife',
+    },
+    {
+      file: './es/vs_transform.js',
+      name: 'vs_transform',
+      globals: {},
+      format: 'es',
+    },
+    {
+      file: './lib/vs_transform.js',
+      name: 'vs_transform',
+      globals: {},
+      format: 'amd'
+    }
+  ],
   plugins: [
   ]
-}
-
-if (env === 'production') {
-}
-
-export default config
+};

@@ -25,9 +25,8 @@
       }
     </style>
 
-    <script type="text/javascript" src="../build/firminCSSMatrix.js"></script>
-    <script type="text/javascript" src="../build/vs_util.js"></script>
-    <script type="text/javascript" src="../build/transform.js"></script>
+    <script type="text/javascript" src="../node_modules/vs_utils/dist/vs_utils.js"></script>
+    <script type="text/javascript" src="../dist/vs_transform.js"></script>
     
     <script>
       function test ()
@@ -38,7 +37,7 @@
         node.vsScale (2)
 
         node = document.getElementById ('node2');
-        node.vsSetNewTransformOrigin (new vs.Point (50, 50))
+        node.vsSetNewTransformOrigin (new vs_utils.Point (50, 50))
         node.vsRotate (45);
         node.vsTranslate (50, 50);
         node.vsScale (2)

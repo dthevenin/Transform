@@ -1,6 +1,4 @@
-
-
-import { CSSMatrix, isNumber, extend, setElementTransform } from 'vs_utils';
+import { CSSMatrix, extend, isNumber, setElementTransform } from 'vs_utils';
 
 const HTMLElement = (window && window.HTMLElement);
 
@@ -22,7 +20,7 @@ function translate (x, y)
   this._vs_node_ty = y;
   
   applyTransformation (this);
-};
+}
 
 /**
  *  Rotate the view about the horizontal and vertical axes.
@@ -37,7 +35,7 @@ function rotate (r)
   this._vs_node_r = r;
   
   applyTransformation (this);
-};
+}
 
 /**
  *  Scale the view
@@ -52,7 +50,7 @@ function scale (s)
   this._vs_node_s = s;
   
   applyTransformation (this);
-};
+}
 
 /**
  *  Define a new transformation matrix, using the transformation origin 
@@ -87,7 +85,7 @@ function setNewTransformOrigin (origin)
   this._vs_node_r = 0;
   
   this._vs_node_origin = [origin.x, origin.y];
-};
+}
 
 
 /**
@@ -97,7 +95,7 @@ function clearTransformStack ()
 {
   if (this._vs_transform) delete this._vs_transform;
   this._vs_transform = undefined;
-};
+}
 
 /**
  *  Return the current transform matrix apply to this graphic Object.
@@ -106,7 +104,7 @@ function clearTransformStack ()
  */
 function getCTM ()
 {
-  var matrix = new CSSMatrix (), transform, matrix_tmp;
+  var matrix = new CSSMatrix ();
   if (!this._vs_node_origin) this._vs_node_origin = [0, 0];
   
   // apply current transformation
@@ -120,7 +118,7 @@ function getCTM ()
   // apply previous transformations and return the matrix
   if (this._vs_transform) return matrix.multiply (this._vs_transform);
   else return matrix;
-};
+}
 
 /**
  *  Returns the current transform combination matrix generate by the
@@ -143,7 +141,7 @@ function getParentCTM ()
   }
   
   return multiplyParentTCM (this.parentNode);
-};
+}
 
 /**
  */
@@ -152,7 +150,7 @@ function applyTransformation (node)
   var matrix = node.vsGetCTM ();
   
   setElementTransform (node, matrix.toString ());
-};
+}
 
 extend (HTMLElement.prototype, {
   _vs_node_tx:                  0,
