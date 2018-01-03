@@ -45,7 +45,7 @@ function rotate (r)
  * @param s {float} scale value
  */
 function scale (s)
-{    
+{
   if (this._vs_node_s === s) { return; }
 
   this._vs_node_s = s;

@@ -21,6 +21,6 @@ uglify-es@^3.3.2:
     commander "~2.12.1"
     source-map "~0.6.1"
 
-"vs_utils@https://github.com/dthevenin/Util.git":
-  version "1.0.0"
-  resolved "https://github.com/dthevenin/Util.git#eae4da0ead58118d1444e8fc8ec6a7f108e65300"
+"vs_utils@https://github.com/dthevenin/Util.git#v1.0.3":
+  version "1.0.3"
+  resolved "https://github.com/dthevenin/Util.git#f12aa3a030032f29aa597eac369a9548e4498faa"
