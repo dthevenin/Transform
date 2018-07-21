@@ -159,4 +159,4 @@
     vsGetParentCTM:                getParentCTM
   });
 
-}(null));
+}(vs_utils));

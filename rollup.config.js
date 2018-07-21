@@ -5,19 +5,19 @@ export default {
     {
       file: './dist/vs_transform.js',
       name: 'vs_transform',
-      globals: {},
+      globals: { vs_utils: 'vs_utils' },
       format: 'iife',
     },
     {
       file: './es/vs_transform.js',
       name: 'vs_transform',
-      globals: {},
+      globals: { vs_utils: 'vs_utils' },
       format: 'es',
     },
     {
       file: './lib/vs_transform.js',
       name: 'vs_transform',
-      globals: {},
+      globals: { vs_utils: 'vs_utils' },
       format: 'amd'
     }
   ],
