@@ -1,4 +1,4 @@
-import { CSSMatrix, extend, isNumber, setElementTransform } from 'vs_utils';
+import { CSSMatrix, isNumber, extend, setElementTransform } from 'vs_utils';
 
 const HTMLElement = (window && window.HTMLElement);
 
@@ -21,7 +21,6 @@ function translate (x, y)
   
   applyTransformation (this);
 }
-
 /**
  *  Rotate the view about the horizontal and vertical axes.
  *  <p/>The angle units is radians.
@@ -36,7 +35,6 @@ function rotate (r)
   
   applyTransformation (this);
 }
-
 /**
  *  Scale the view
  *  <p/>The scale is limited by a max and min scale value.
@@ -51,7 +49,6 @@ function scale (s)
   
   applyTransformation (this);
 }
-
 /**
  *  Define a new transformation matrix, using the transformation origin 
  *  set as parameter.
@@ -87,7 +84,6 @@ function setNewTransformOrigin (origin)
   this._vs_node_origin = [origin.x, origin.y];
 }
 
-
 /**
  *  Remove all previous transformations set for this view
  */
@@ -96,7 +92,6 @@ function clearTransformStack ()
   if (this._vs_transform) delete this._vs_transform;
   this._vs_transform = undefined;
 }
-
 /**
  *  Return the current transform matrix apply to this graphic Object.
  *
@@ -119,7 +114,6 @@ function getCTM ()
   if (this._vs_transform) return matrix.multiply (this._vs_transform);
   else return matrix;
 }
-
 /**
  *  Returns the current transform combination matrix generate by the
  *  hierarchical parents of this graphic Object.
@@ -142,7 +136,6 @@ function getParentCTM ()
   
   return multiplyParentTCM (this.parentNode);
 }
-
 /**
  */
 function applyTransformation (node)
@@ -151,7 +144,6 @@ function applyTransformation (node)
   
   setElementTransform (node, matrix.toString ());
 }
-
 extend (HTMLElement.prototype, {
   _vs_node_tx:                  0,
   _vs_node_ty:                  0,
