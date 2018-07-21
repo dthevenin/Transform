@@ -1,6 +1,6 @@
 {
   "name": "vs_transform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Transform.js is a microlib that aim to apply transformations on HTML element",
   "main": "./lib/vs_transform.js",
   "module": "es/vs_transform.js",
@@ -24,10 +24,10 @@
     "es/"
   ],
   "devDependencies": {
-    "rollup": "^0.53.1",
-    "uglify-es": "^3.3.2"
+    "rollup": "^0.63.4",
+    "uglify-es": "^3.3.9"
   },
   "dependencies": {
-    "vs_utils": "https://github.com/dthevenin/Util.git#v1.0.3"
+    "vs_utils": "git+ssh://git@github.com/dthevenin/Util.git#v1.0.4"
   }
 }
