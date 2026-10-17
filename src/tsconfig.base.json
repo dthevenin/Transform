@@ -2,10 +2,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "noImplicitAny": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowJs": false,
     "lib": [
-      "ES2021",
+      "ES2022",
       "DOM"
     ],
     "composite": true,
@@ -13,6 +13,6 @@
     "declarationMap": true,
     "incremental": true,
   },
-  "include": ["./utils"],
+  "include": ["./transform"],
   "exclude": ["node_modules"]
 }

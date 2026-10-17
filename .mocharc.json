@@ -1,0 +1,6 @@
+{
+  "node-option": ["loader=@istanbuljs/esm-loader-hook"],
+  "require": ["tsx/esm", "test/setup.ts"],
+  "spec": ["test/**/*.spec.ts"],
+  "recursive": true
+}
