@@ -2,8 +2,6 @@ import { vec2, vec3 } from 'gl-matrix';
 import { Matrix, setElementTransform } from 'vs_ui_utils';
 import { copyVector2, copyVector3 } from './helpers';
 
-const HTMLElement = (window && window.HTMLElement);
-
 /*****************************************************************
  *                Transformation methods
  ****************************************************************/
@@ -76,8 +74,6 @@ export class Transform {
     if (v.length !== 3) { return; }
 
     copyVector3(this.#translation, v);
-
-    // this.applyTransformation(this);
   };
 
   /**
@@ -86,8 +82,6 @@ export class Transform {
    */
   set rotation(v: vec3) {
     copyVector3(this.#rotation, v);
-
-    // this.applyTransformation(this);
   };
 
   /**
@@ -96,8 +90,6 @@ export class Transform {
    */
   set scaling(v: number) {
     this.#scaling = v;
-
-    // this.applyTransformation(this);
   };
 
   /**
@@ -121,17 +113,20 @@ export class Transform {
    * @return {Matrix} the current transform matrix
    */
   getCTM(): Matrix {
-    let matrix = new DOMMatrix ();
+    // DOMMatrix non-Self methods return a plain DOMMatrix, so mutate in place
+    // to keep the Matrix subclass
+    const matrix = new Matrix();
 
     // apply current transformation
-    matrix = matrix.translate(this.#transformOrigin[0], this.#transformOrigin[1], 0);
-    matrix = matrix.translate(this.#translation[0], this.#translation[1], this.#translation[2]);
-    matrix = matrix.rotate(this.#rotation[0], this.#rotation[1], this.#rotation[2]);
-    matrix = matrix.scale(this.#scaling, this.#scaling, 1);
-    matrix = matrix.translate(-this.#transformOrigin[0], -this.#transformOrigin[1], 0);
+    matrix.translateSelf(this.#transformOrigin[0], this.#transformOrigin[1], 0);
+    matrix.translateSelf(this.#translation[0], this.#translation[1], this.#translation[2]);
+    matrix.rotateSelf(this.#rotation[0], this.#rotation[1], this.#rotation[2]);
+    matrix.scaleSelf(this.#scaling, this.#scaling, 1);
+    matrix.translateSelf(-this.#transformOrigin[0], -this.#transformOrigin[1], 0);
 
     // apply previous transformations and return the matrix
-    return (this.#transform ? matrix.multiply(this.#transform) : matrix) as Matrix;
+    if (this.#transform) { matrix.multiplySelf(this.#transform); }
+    return matrix;
   };
 
   // /**
@@ -158,9 +153,10 @@ export class Transform {
   // };
 
   /**
+   *  Apply the current transform matrix to the given element.
    */
-  private applyTransformation(node: HTMLElement) {
-    var matrix = this.getCTM();
+  applyTransformation(node: HTMLElement) {
+    const matrix = this.getCTM();
 
     setElementTransform(node, matrix.toString());
   };

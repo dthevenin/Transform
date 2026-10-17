@@ -51,7 +51,8 @@ export declare class Transform {
      */
     getCTM(): Matrix;
     /**
+     *  Apply the current transform matrix to the given element.
      */
-    private applyTransformation;
+    applyTransformation(node: HTMLElement): void;
 }
 //# sourceMappingURL=transform.d.ts.map

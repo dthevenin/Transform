@@ -10,10 +10,17 @@ export default [
       sourceMap: true, // default
       tsconfig: 'src/tsconfig.json'
     })],
+    external: ['gl-matrix', 'vs_ui_utils'],
     output: [
       {
         file: `dist/vs_transform.amd.js`,
         format: 'amd',
+        sourcemap: true,
+        exports: 'named',
+      },
+      {
+        file: `dist/vs_transform.cjs`,
+        format: 'cjs',
         sourcemap: true,
         exports: 'named',
       },

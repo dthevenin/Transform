@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist build",
-    "prepublish": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
     "tsc": "tsc -p src/tsconfig.json",
     "make-bundle": "rollup --config",
-    "build": "npm run clean; npm run tsc; npm run make-bundle",
+    "build": "npm run clean && npm run tsc && npm run make-bundle",
     "test": "nyc mocha",
     "typecheck:test": "tsc -p test/tsconfig.json"
   },
@@ -39,12 +39,14 @@
     "node": ">=15.0.0"
   },
   "type": "module",
-  "types": "./dist/vs_transform.d.js",
+  "main": "./dist/vs_transform.cjs",
+  "module": "./dist/vs_transform.es.js",
+  "types": "./dist/vs_transform.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/vs_transform.d.ts",
       "import": "./dist/vs_transform.es.js",
-      "require": "./dist/vs_transform.amd.js",
-      "types": "./dist/vs_transform.d.js"
+      "require": "./dist/vs_transform.cjs"
     }
   }
 }

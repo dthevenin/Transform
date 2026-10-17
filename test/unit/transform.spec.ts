@@ -1,6 +1,8 @@
 import assert from 'assert';
 import { vec2, vec3 } from 'gl-matrix';
 
+import { Matrix } from 'vs_ui_utils';
+
 import { Transform } from '../../src/transform/transform';
 
 const EPSILON = 1e-9;
@@ -29,6 +31,14 @@ describe('Transform', () => {
   describe('getCTM', () => {
     it('is the identity for a new transform', () => {
       assert.ok(transform.getCTM().isIdentity);
+    });
+
+    it('returns a Matrix, with or without stacked transformations', () => {
+      transform.scaling = 2;
+      assert.ok(transform.getCTM() instanceof Matrix);
+      transform.transformOrigin = vec2.fromValues(10, 10);
+      assert.ok(transform.getCTM() instanceof Matrix);
+      assert.strictEqual(typeof transform.getCTM().getMatrixStr(), 'string');
     });
 
     it('applies a translation', () => {
@@ -121,6 +131,15 @@ describe('Transform', () => {
       transform.scaling = 2;
       // Stacked translation first, then the new scale: (1, 0) -> (6, 0) -> (12, 0)
       assertPoint(apply(transform.getCTM(), 1, 0), [12, 0]);
+    });
+  });
+
+  describe('applyTransformation', () => {
+    it('sets the element transform style', () => {
+      const node = document.createElement('div');
+      transform.translation = vec3.fromValues(5, 0, 0);
+      transform.applyTransformation(node);
+      assert.notStrictEqual(node.style.transform, '');
     });
   });
 

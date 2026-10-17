@@ -2,10 +2,10 @@
 node_modules/
 .vscode/
 
-./build
-./dist
 
 .nyc_output/
+coverage/
 .idea/
 coverage/
 *.log
+dist/
